@@ -37,8 +37,9 @@ body {
 }
 
 .main-content {
+    flex-direction: column;
     grid-area: main;
-    justify-content: end;
+    gap: 20px;
     margin-right: 20px;
     /* background-color: lightgreen; */
 }
@@ -63,6 +64,9 @@ body {
     border-radius: 3px;
 }
 
+.video-overview {
+    width: 420px;
+}
 /* Helpers */
 
 .flex {
