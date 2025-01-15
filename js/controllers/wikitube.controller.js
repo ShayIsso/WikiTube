@@ -1,5 +1,5 @@
 'use strict';
-let gSearchStr = 'Kendrick Lamar'
+let gSearchStr = 'KendrickLamar'
 
 
 function onInit() {
@@ -15,6 +15,11 @@ function onLoadVideosData() {
             renderFrontVideo(res)
         })
         .catch(err => console.log('err:', err))
+
+    getWiki(gSearchStr)
+        .then(renderWikiInfo)
+        .catch(err => console.log('err:', err))
+
 }
 
 function renderVideos(videos) {
@@ -33,6 +38,17 @@ function renderFrontVideo(videos) {
                 <iframe width="420" height="315" src="https://www.youtube.com/embed/${frontVideo.videoId}?controls=1"></iframe>
     `
     document.querySelector('.video-player').innerHTML = strHTMLs
+}
+
+function renderWikiInfo(info) {
+    console.log(info);
+    
+    const mainInfos = [info[0], info[1]]
+    const strHTMLs = mainInfos.map(mainInfo =>
+        `<h3>${mainInfo.title}</h3>
+         <p class=video-overview>${mainInfo.overview}</p>`
+    )
+    document.querySelector('.wiki-results').innerHTML = strHTMLs.join('')
 }
 
 function onSearchVideo(ev) {
