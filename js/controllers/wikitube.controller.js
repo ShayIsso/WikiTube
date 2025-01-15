@@ -1,5 +1,10 @@
 'use strict';
-let gSearchStr = 'migos'
+let gSearchStr = 'Kendrick Lamar'
+
+
+function onInit() {
+    onLoadVideosData()
+}
 
 function onLoadVideosData() {
     console.log('load videos');
