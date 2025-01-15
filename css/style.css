@@ -25,16 +25,21 @@ body {
 
 .main-header {
     grid-area: header;
+    margin-left: 20px;
+    margin-right: 20px;
     /* background-color: lightblue; */
 }
 
 .main-aside {
     grid-area: aside;
+    margin-left: 20px;
     /* background-color: lightcoral; */
 }
 
 .main-content {
     grid-area: main;
+    justify-content: end;
+    margin-right: 20px;
     /* background-color: lightgreen; */
 }
 
@@ -44,12 +49,22 @@ body {
     /* background-color: lightgoldenrodyellow; */
 }
 
+.video-list {
+    flex-direction: column;
+    gap: clamp(20px, 3vh, 50px);
+}
+
 .video-li {
     gap: 5px;
     text-align: start;
+    margin-bottom: 0;
+    padding: 10px;
+    background-color: rgba(240, 128, 128, 0.66);
+    border-radius: 3px;
 }
 
 /* Helpers */
+
 .flex {
     display: flex;
 }
@@ -68,6 +83,11 @@ body {
     margin: 0;
     padding: 0;
     list-style-type: none;
+}
+
+iframe {
+    border: none;
+    border-radius: 3px;
 }
 
 /************************************/
