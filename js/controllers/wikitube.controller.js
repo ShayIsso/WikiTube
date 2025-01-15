@@ -1,9 +1,9 @@
 'use strict';
+let gSearchStr = 'migos'
 
-onLoadVideosData()
 function onLoadVideosData() {
     console.log('load videos');
-    getVideos()
+    getVideos(gSearchStr)
         .then(res => {
             console.log(res)
             renderVideos(res)
@@ -28,4 +28,12 @@ function renderFrontVideo(videos) {
                 <iframe width="420" height="315" src="https://www.youtube.com/embed/${frontVideo.videoId}?controls=1"></iframe>
     `
     document.querySelector('.video-player').innerHTML = strHTMLs
+}
+
+function onSearchVideo(ev) {
+    ev.preventDefault()
+    const elInput = document.querySelector('.search-input')
+    gSearchStr = elInput.value
+    console.log(gSearchStr)
+    onLoadVideosData()
 }

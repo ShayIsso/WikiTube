@@ -2,17 +2,17 @@
 const YT_KEY = 'AIzaSyALvjNbl1AWLqm_7EpCLN7doLT1FEieKxo'
 const WIKI_API_KEY = `https://en.wikipedia.org/w/api.php?&origin=*&action=query&list=search&srsearch=beatles&format=json`
 // const YOUTUBE_TOP_FIVE = `https://www.googleapis.com/youtube/v3/search?part=snippet&videoEmbeddable=true&type=video&key=${YT_KEY}&q=${value}`
-const TEST_KEY = `https://www.googleapis.com/youtube/v3/search?part=snippet&videoEmbeddable=true&type=video&key=${YT_KEY}&q=osherCohen`
+const TEST_KEY = `https://www.googleapis.com/youtube/v3/search?part=snippet&videoEmbeddable=true&type=video&key=${YT_KEY}&q=`
 
 let useMockData = false
 
-function getVideos() {
+function getVideos(searchVideo) {
     if (useMockData) {
         console.log('Mock mode enabled. Returning fake data...')
         return Promise.resolve(getMockData())
     } else {
         console.log('Fetching real data from the API...')
-        return axios.get(TEST_KEY)
+        return axios.get(TEST_KEY+searchVideo)
             .then(({data}) => data.items.map(item => {
                 return {
                     title: item.snippet.title,
@@ -26,8 +26,6 @@ function getVideos() {
             })
     }
 }
-
-
 
 //* ------------------- Fake Data -------------------
 
