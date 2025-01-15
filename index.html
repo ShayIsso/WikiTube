@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wikitube</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body onload="onLoadVideos()">
+    <div class="grid-layout-container">
+        <header class="main-header flex align-center space-between">
+            <div class="logo">
+                <h1>Wikitube</h1>
+            </div>
+            <div class="search-box flex">
+                <input type="text" class="search-input" placeholder="Search">
+                <button>Search</button>
+            </div>
+        </header>
+        <aside class="main-aside">
+            <ul class="songs-list"></ul>
+        </aside>
+        <main class="main-content">
+            <div class="video"></div>
+            <section class="wiki-results"></section>
+        </main>
+        <footer class="main-footer">
+            © 2025 Wikitube. All rights reserved.
+        </footer>
+    </div>
+
+    <script src="lib/swal.js"></script>
+    <script src="lib/axios.js"></script>
+
+    <script src="js/services/wikitube.sercvice.js"></script>
+    <script src="js/controllers/wikitube.controller.js"></script>
+</body>
+
+</html>
