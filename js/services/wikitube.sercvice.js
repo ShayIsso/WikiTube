@@ -57,6 +57,7 @@ function getWiki(searchQuery) {
         })
         .catch(err => {
             console.error('Wiki API Error:', err)
+            return []
         })
 
 }

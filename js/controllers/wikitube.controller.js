@@ -7,18 +7,13 @@ function onInit() {
 }
 
 function onLoadVideosData() {
-    getYtVideos(currSearchQuery)
-        .then(res => {
-            console.log(res)
-            renderVideoList(res)
-            renderFeaturedVideo(res)
+    Promise.all([getYtVideos(currSearchQuery), getWiki(currSearchQuery)])
+        .then(([videos, wikiInfo]) => {
+            renderVideoList(videos)
+            renderFeaturedVideo(videos)
+            renderWikiInfo(wikiInfo)
         })
         .catch(err => console.log('err:', err))
-
-    getWiki(currSearchQuery)
-        .then(renderWikiInfo)
-        .catch(err => console.log('err:', err))
-
 }
 
 function renderVideoList(videos) {
@@ -40,7 +35,13 @@ function renderFeaturedVideo(videos) {
 }
 
 function renderWikiInfo(info) {
-    const mainInfos = [info[0], info[1]]
+    if (!info.length) {
+        console.error('Wiki info is empty or undefined.')
+        document.querySelector('.wiki-results').innerHTML = '<p>No wiki information available.</p>'
+        return
+    }
+
+    const mainInfos = [info[0], info[3]]
     const strHTMLs = mainInfos.map(mainInfo =>
         `<h3>${mainInfo.title}</h3>
          <p class=video-overview>${mainInfo.overview}</p>`
@@ -51,6 +52,6 @@ function renderWikiInfo(info) {
 function onSearchVideo(ev) {
     ev.preventDefault()
     const elInput = document.querySelector('.search-input')
-    gSearchStr = elInput.value
+    currSearchQuery = elInput.value
     onLoadVideosData()
 }
