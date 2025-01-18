@@ -1,47 +1,66 @@
 'use strict';
 const YT_KEY = 'AIzaSyALvjNbl1AWLqm_7EpCLN7doLT1FEieKxo'
-// const WIKI_API = `https://en.wikipedia.org/w/api.php?&origin=*&action=query&list=search&srsearch=kendrickLamar&format=json`
-// const YOUTUBE_TOP_FIVE = `https://www.googleapis.com/youtube/v3/search?part=snippet&videoEmbeddable=true&type=video&key=${YT_KEY}&q=${value}`
 const YT_API = `https://www.googleapis.com/youtube/v3/search?part=snippet&videoEmbeddable=true&type=video&key=${YT_KEY}&q=`
+const YT_STORAGE_KEY = 'savedVideos'
+const WIKI_STORAGE_KEY = 'savedWiki'
 
-let useMockData = true
+let useMockData = false
 
 function getVideos(searchVideo) {
-    if (useMockData) {
-        console.log('Mock mode enabled. Returning fake data...')
-        return Promise.resolve(getYtMockData())
-    } else {
-        console.log('Fetching real data from the API...')
-        return axios.get(YT_API+searchVideo)
-            .then(({data}) => data.items.map(item => {
-                return {
-                    title: item.snippet.title,
-                    imgUrl: item.snippet.thumbnails.default.url,
-                    videoId: item.id.videoId
-                }
-            }
-            ))
-            .catch(err => {
-                console.error('API Error:', err)
-            })
+    const savedVideos = loadFromStorage(YT_STORAGE_KEY) || {}
+
+    if (savedVideos[searchVideo]) {
+        console.log('Returning videos data from cache...')
+        return Promise.resolve(savedVideos[searchVideo])
     }
+
+    console.log('Fetching real data from the API...')
+    return axios.get(YT_API + searchVideo)
+        .then(({ data }) => {
+            const videoRes = data.items.map(item => ({
+                title: item.snippet.title,
+                imgUrl: item.snippet.thumbnails.default.url,
+                videoId: item.id.videoId
+            }))
+
+            savedVideos[searchVideo] = videoRes
+
+            saveToStorage(YT_STORAGE_KEY, savedVideos)
+
+            return videoRes
+        })
+        .catch(err => {
+            console.error('YT API Error:', err)
+        })
 }
 
 function getWiki(searchVideo) {
     const WIKI_API = `https://en.wikipedia.org/w/api.php?&origin=*&action=query&list=search&srsearch=${searchVideo}&format=json`
 
-    if (useMockData) {
-        console.log('Mock mode enabled. Returning fake data...')
-        return Promise.resolve(getWikiMockData())
-    } else {
+    const savedWiki = loadFromStorage(WIKI_STORAGE_KEY) || {}
+
+    if (savedWiki[searchVideo]) {
+        console.log('Returning wiki data from cache...')
+        return Promise.resolve(savedWiki[searchVideo])
+    }
+
+    console.log('Fetching real wiki data from the API...')
     return axios.get(WIKI_API)
-        .then(({data}) => data.query.search.map(res => {
-            return {
+        .then(({ data }) => {
+            const wikiRes = data.query.search.map(res => ({
                 title: res.title,
                 overview: res.snippet
-            }
-        }))
-    }
+            }))
+
+            savedWiki[searchVideo] = wikiRes
+
+            saveToStorage(WIKI_STORAGE_KEY, savedWiki)
+            return wikiRes
+        })
+        .catch(err => {
+            console.error('Wiki API Error:', err)
+        })
+
 }
 
 //* ------------------- Fake Data -------------------
