@@ -1,5 +1,5 @@
 'use strict';
-let gSearchStr = 'KendrickLamar'
+let currSearchQuery = 'KendrickLamar'
 
 
 function onInit() {
@@ -7,22 +7,21 @@ function onInit() {
 }
 
 function onLoadVideosData() {
-    console.log('load videos');
-    getVideos(gSearchStr)
+    getYtVideos(currSearchQuery)
         .then(res => {
             console.log(res)
-            renderVideos(res)
-            renderFrontVideo(res)
+            renderVideoList(res)
+            renderFeaturedVideo(res)
         })
         .catch(err => console.log('err:', err))
 
-    getWiki(gSearchStr)
+    getWiki(currSearchQuery)
         .then(renderWikiInfo)
         .catch(err => console.log('err:', err))
 
 }
 
-function renderVideos(videos) {
+function renderVideoList(videos) {
     const strHTMLs = videos.map(video => `
         <li class="video-li flex align-center">
         <img class="video-img" src="${video.imgUrl}" alt="${video.title}">
@@ -32,7 +31,7 @@ function renderVideos(videos) {
     document.querySelector('.video-list').innerHTML = strHTMLs.join('')
 }
 
-function renderFrontVideo(videos) {
+function renderFeaturedVideo(videos) {
     const frontVideo = videos[0]
     const strHTMLs = `
                 <iframe width="420" height="315" src="https://www.youtube.com/embed/${frontVideo.videoId}?controls=1"></iframe>
@@ -41,8 +40,6 @@ function renderFrontVideo(videos) {
 }
 
 function renderWikiInfo(info) {
-    console.log(info);
-    
     const mainInfos = [info[0], info[1]]
     const strHTMLs = mainInfos.map(mainInfo =>
         `<h3>${mainInfo.title}</h3>
@@ -55,6 +52,5 @@ function onSearchVideo(ev) {
     ev.preventDefault()
     const elInput = document.querySelector('.search-input')
     gSearchStr = elInput.value
-    console.log(gSearchStr)
     onLoadVideosData()
 }
