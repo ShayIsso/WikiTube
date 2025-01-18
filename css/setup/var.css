@@ -1,0 +1,6 @@
+:root {
+    --grid-gap: 5px;
+    --main-margin: 20px;
+    --video-gap: clamp(20px, 3vh, 50px);
+    --light-coral: rgba(240, 128, 128, 0.66);
+}

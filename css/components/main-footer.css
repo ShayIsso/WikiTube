@@ -1,0 +1,5 @@
+.main-footer {
+    grid-area: footer;
+    text-align: center;
+    /* background-color: lightgoldenrodyellow; */
+}

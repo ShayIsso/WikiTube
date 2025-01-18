@@ -1,0 +1,11 @@
+.main-content {
+    flex-direction: column;
+    grid-area: main;
+    gap: 20px;
+    margin-right: 20px;
+    /* background-color: lightgreen; */
+}
+
+.video-overview {
+    width: 420px;
+}

@@ -1,0 +1,11 @@
+.grid-layout-container {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-template-rows: 80px auto 20px;
+    grid-template-areas:
+        "header header"
+        "aside main"
+        "footer footer";
+    gap: 5px;
+    min-height: 100vh;
+}

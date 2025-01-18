@@ -1,0 +1,6 @@
+.main-header {
+    grid-area: header;
+    margin-left: 20px;
+    margin-right: 20px;
+    /* background-color: lightblue; */
+}
