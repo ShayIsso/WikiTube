@@ -1,11 +1,24 @@
 .main-content {
     flex-direction: column;
     grid-area: main;
-    gap: 20px;
-    margin-right: 20px;
-    /* background-color: lightgreen; */
+    gap: var(--content-gap);
+    margin-right: var(--side-margin);
 }
 
-.video-overview {
-    width: 420px;
+.video-container {
+    width: 100%;
+    max-width: 1020px;
+}
+
+.video-player {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16/9; 
+}
+
+.wiki-results {
+    padding: var(--content-gap);
+    background-color: white;
+    border-radius: var(--border-radius);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }

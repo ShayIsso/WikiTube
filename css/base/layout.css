@@ -1,11 +1,11 @@
 .grid-layout-container {
     display: grid;
     grid-template-columns: 1fr 2fr;
-    grid-template-rows: 80px auto 20px;
+    grid-template-rows: var(--header-height) auto var(--footer-height);
     grid-template-areas:
         "header header"
         "aside main"
         "footer footer";
-    gap: 5px;
+    gap: var(--grid-gap);
     min-height: 100vh;
 }

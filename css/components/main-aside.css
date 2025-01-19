@@ -1,20 +1,24 @@
 .main-aside {
     grid-area: aside;
-    margin-left: 20px;
-    /* background-color: lightcoral; */
+    margin-left: var(--side-margin);
 }
 
 .video-list {
     flex-direction: column;
-    gap: clamp(20px, 3vh, 50px);
+    gap: var(--video-gap);
 }
 
 .video-li {
-    gap: 5px;
+    gap: var(--grid-gap);
     text-align: start;
     margin-bottom: 0;
     padding: 10px;
-    background-color: rgba(240, 128, 128, 0.66);
-    border-radius: 3px;
+    background-color: var(--video-item-bg);
+    border-radius: var(--border-radius);
     cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.video-li:hover {
+    transform: scale(1.02);
 }

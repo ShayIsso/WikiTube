@@ -1,6 +1,21 @@
 :root {
+    /* Layout */
     --grid-gap: 5px;
-    --main-margin: 20px;
+    --content-gap: 20px;
+    
+    /* Colors */
+    --primary-bg: paleturquoise;
+    --video-item-bg: rgba(240, 128, 128, 0.66);
+    
+    /* Spacing */
+    --header-height: 80px;
+    --footer-height: 20px;
+    --side-margin: 20px;
     --video-gap: clamp(20px, 3vh, 50px);
-    --light-coral: rgba(240, 128, 128, 0.66);
+    
+    /* Border */
+    --border-radius: 3px;
+    
+    /* Typography */
+    --primary-font: Arial, Helvetica, sans-serif;
 }

@@ -1,6 +1,29 @@
 .main-header {
     grid-area: header;
-    margin-left: 20px;
-    margin-right: 20px;
-    /* background-color: lightblue; */
+    margin-inline: var(--side-margin);
+}
+
+.search-input {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: var(--border-radius);
+    margin-right: 5px;
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: var(--video-item-bg);
+}
+
+.search-box button {
+    padding: 8px;
+    border: none;
+    border-radius: var(--border-radius);
+    background-color: var(--video-item-bg);
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+}
+
+.search-box button:hover {
+    opacity: 0.9;
 }

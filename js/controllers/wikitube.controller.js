@@ -27,10 +27,12 @@ function renderVideoList(videos) {
 }
 
 function renderFeaturedVideo(videoId) {
-    const strHTMLs = `
-                <iframe width="420" height="315" src="https://www.youtube.com/embed/${videoId}?controls=1"></iframe>
-    `
-    document.querySelector('.video-player').innerHTML = strHTMLs
+    // const strHTMLs = `
+    //             <iframe width="420" height="315" src=""></iframe>
+    // `
+
+    const videoSrc = `https://www.youtube.com/embed/${videoId}?controls=1`
+    document.querySelector('.video-player').src = videoSrc
 }
 
 function renderWikiInfo(info) {
